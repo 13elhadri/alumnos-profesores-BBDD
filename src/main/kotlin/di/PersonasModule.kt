@@ -2,7 +2,6 @@ package di
 
 import cache.Cache
 import cache.CacheImpl
-import config.Config
 import database.service.SqlDeLightManager
 import org.koin.dsl.module
 import personas.models.Persona
@@ -27,7 +26,7 @@ val personasModule= module {
 
 
 
-    factory<PersonasService> { PersonasServiceImpl(get()) }
+    factory<PersonasService> { PersonasServiceImpl(get(),get()) }
 
 
 }

@@ -5,7 +5,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 
 class CacheImpl<K, T>(
-    private val size: Int
+    private val size: String
 ) : Cache<K, T> {
     private val cache = mutableMapOf<K, T>()
 
@@ -20,7 +20,7 @@ class CacheImpl<K, T>(
 
     override fun put(key: K, value: T): Result<T, Nothing> {
         //logger.debug { "Guardando valor en la cache" }
-        if (cache.size >= size && !cache.containsKey(key)) {
+        if (cache.size >= size.toInt() && !cache.containsKey(key)) {
             //logger.debug { "Eliminando valor de la cache" }
             cache.remove(cache.keys.first())
         }

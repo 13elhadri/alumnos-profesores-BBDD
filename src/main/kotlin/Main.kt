@@ -3,8 +3,6 @@ import di.personasModule
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.fileProperties
-import org.koin.test.verify.Verify.verify
-import personas.models.Persona
 import org.koin.test.verify.verify
 
 @OptIn(KoinExperimentalAPI::class)

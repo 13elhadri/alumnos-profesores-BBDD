@@ -11,23 +11,23 @@ class PersonasRepositoryImpl (
     private val db = dbManager.databaseQueries
 
     override fun findAll(): List<Persona> {
-        //logger.debug { "Buscando todos los clientes" }
+        //logger.debug { "Buscando todos las Personas" }
         return db.selectAllPersonas().executeAsList().map { it.toPersona() }
     }
 
     override fun findById(id: Long): Persona? {
-        //logger.debug { "Buscando cliente por id: $id" }
+        //logger.debug { "Buscando Persona por id: $id" }
         return db.selectPersonaById(id).executeAsOneOrNull()?.toPersona()
     }
 
-    override fun save(cliente: Persona): Persona {
-        //logger.debug { "Guardando cliente: $cliente" }
+    override fun save(persona: Persona): Persona {
+        //logger.debug { "Guardando Persona: $persona" }
 
         val timeStamp = LocalDateTime.now().toString()
 
         db.transaction {
             db.insertPersona(
-                nombre = cliente.nombre,
+                nombre = persona.nombre,
                 created_at = timeStamp,
             )
         }
@@ -36,7 +36,7 @@ class PersonasRepositoryImpl (
     }
 
     override fun update(id: Long, cliente: Persona): Persona? {
-        //logger.debug { "Actualizando cliente por id: $id" }
+        //logger.debug { "Actualizando Persona por id: $id" }
         var result = this.findById(id) ?: return null
         val timeStamp = LocalDateTime.now()
         result.nombre=cliente.nombre
@@ -52,10 +52,9 @@ class PersonasRepositoryImpl (
     }
 
     override fun delete(id: Long): Persona? {
-        //logger.debug { "Borrando cliente por id: $id" }
+        //logger.debug { "Borrando Persona por id: $id" }
         val result = this.findById(id) ?: return null
         // Esto es borrado lógico
-        val timeStamp = LocalDateTime.now()
         db.updatePersona(
             nombre = result.nombre,
             is_deleted = 1,

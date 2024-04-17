@@ -55,7 +55,7 @@ class SqlDeLightManager(
 
 
     private fun demoClientes() {
-        //logger.debug { "Datos de ejemplo de Clientes" }
+        //logger.debug { "Datos de ejemplo de Persona" }
         initDemoPersonas().forEach {
             databaseQueries.insertPersona(
                 nombre = it.nombre,
