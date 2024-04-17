@@ -1,0 +1,38 @@
+-- Personas Entity
+
+-- Tabla de Personas
+CREATE TABLE IF NOT EXISTS PersonaEntity (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    is_deleted INTEGER NOT NULL DEFAULT 0
+);
+
+-- Operaciones CRUD
+removeAllPersonas:
+DELETE FROM PersonaEntity;
+
+selectAllPersonas:
+SELECT * FROM PersonaEntity;
+
+selectPersonaById:
+SELECT * FROM PersonaEntity WHERE id = ?;
+
+selectAllPersonasByIsDeleted:
+SELECT * FROM PersonaEntity WHERE is_deleted = ?;
+
+
+-- De esta manera podremos hacerlo con transacciones usando la función last_insert_rowid() de SQLite
+selectPersonaLastInserted:
+SELECT * FROM PersonaEntity WHERE id = last_insert_rowid();
+
+insertPersona:
+INSERT INTO PersonaEntity (nombre, created_at) VALUES (?, ?);
+
+
+
+updatePersona:
+UPDATE PersonaEntity SET nombre = ?, is_deleted = ? WHERE id = ?;
+
+deletePersona:
+DELETE FROM PersonaEntity WHERE id = ?;
